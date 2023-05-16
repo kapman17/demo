@@ -23,6 +23,6 @@ jobs:
         with:
           cache-read-only: ${{ github.ref != 'refs/heads/master' && github.ref != 'refs/heads/develop' }}
       - name: Run spotless check
-        run: ./gradlew spotlessCheck
+        run: cd demo && ./gradlew spotlessCheck
       - name: Cleanup Gradle Cache
         uses: ./.github/actions/gradle-cleanup
