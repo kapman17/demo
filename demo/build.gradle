@@ -2,6 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '2.7.11'
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+	id 'com.diffplug.gradle.spotless' version '4.5.1'
 }
 
 group = 'com.example'
@@ -16,6 +17,40 @@ configurations {
 
 repositories {
 	mavenCentral()
+}
+
+spotless {
+	java {
+		removeUnusedImports()
+		eclipse().configFile "${rootProject.projectDir}/EclipseFormat.xml"
+		targetExclude("build/generated/sources/**/*.java")
+
+		trimTrailingWhitespace()
+	}
+
+	sql {
+		target 'src/**/resources/**/*.sql'
+		prettier(['prettier': '2.8.3', 'prettier-plugin-sql': '0.12.1'])
+				.config([
+						'language': 'mysql',
+						'database': 'mysql'
+				])
+	}
+
+	format 'gradle', {
+		target '**/*.gradle'
+		trimTrailingWhitespace()
+		indentWithTabs()
+	}
+
+	format 'misc', {
+		// define the files to apply `misc` to
+		target '*.gradle', '*.md', '.gitignore'
+
+		trimTrailingWhitespace()
+		indentWithTabs()
+		endWithNewline()
+	}
 }
 
 dependencies {
