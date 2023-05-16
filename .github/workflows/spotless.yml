@@ -1,0 +1,28 @@
+name: 'Spotless Check'
+
+on:
+  pull_request:
+    branches:
+      - '*'
+
+jobs:
+  spotless:
+    name: 'Run spotless check'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - uses: gradle/wrapper-validation-action@v1
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: 17
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+        with:
+          cache-read-only: ${{ github.ref != 'refs/heads/master' && github.ref != 'refs/heads/develop' }}
+      - name: Run spotless check
+        run: cd demo && ./gradlew spotlessCheck
+      - name: Cleanup Gradle Cache
+        uses: ./.github/actions/gradle-cleanup
