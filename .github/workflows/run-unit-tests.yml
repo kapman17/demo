@@ -32,6 +32,6 @@ jobs:
           restore-keys: ${{ runner.os }}-gradle-caches-
       - name: Run Unit Tests
         run: |
-          ./gradlew test
+          cd demo && ./gradlew test
       - name: Cleanup Gradle Cache
         uses: ./.github/actions/gradle-cleanup
