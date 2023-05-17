@@ -15,6 +15,9 @@ public class DemoServiceImpl implements DemoService {
 
     @Override
     public String getBrowserNameById(Integer id) {
+        if (id < 1) {
+            throw new UnsupportedOperationException("id must be greater than 0");
+        }
         return browserRepository.findTopByIdOrName(id, null).map(Browser::getName).orElse(null);
     }
 }
