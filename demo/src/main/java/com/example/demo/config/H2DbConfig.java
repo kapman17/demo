@@ -14,23 +14,24 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 @Configuration
-@EnableJpaRepositories(basePackages = "com.example.demo.jpa.repository")
+@EnableJpaRepositories(basePackages = "com.example.demo.repository")
 @EnableTransactionManagement
 public class H2DbConfig {
-	public DataSource mySqlDataSource() {
+
+	public DataSource dataSource() {
 		return DataSourceBuilder.create().build();
 	}
 
-	public LocalContainerEntityManagerFactoryBean mySqlEntityManagerFactory(DataSource dataSource, Environment env) {
+	public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource, Environment env) {
 		LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
 		entityManagerFactoryBean.setDataSource(dataSource);
 		entityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
-		entityManagerFactoryBean.setPackagesToScan("com.triplelift.deals_api.jpa.domain.shared");
+		entityManagerFactoryBean.setPackagesToScan("com.example.demo.domain");
 		entityManagerFactoryBean.setJpaProperties(JpaUtils.getJpaProperties(env));
 		return entityManagerFactoryBean;
 	}
 
-	public JpaTransactionManager mySqlTransactionManager(EntityManagerFactory entityManagerFactory) {
+	public JpaTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
 		JpaTransactionManager transactionManager = new JpaTransactionManager();
 		transactionManager.setEntityManagerFactory(entityManagerFactory);
 		return transactionManager;
