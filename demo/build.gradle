@@ -4,6 +4,7 @@ plugins {
 	id 'org.springframework.boot' version '2.7.11'
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
 	id 'com.diffplug.gradle.spotless' version '4.5.1'
+	id 'jacoco'
 }
 
 group = 'com.example'
@@ -61,6 +62,25 @@ spotless {
 		trimTrailingWhitespace()
 		indentWithTabs()
 		endWithNewline()
+	}
+}
+
+/**
+* Set up code coverage reports using jacoco
+* @link https://docs.gradle.org/current/userguide/jacoco_plugin.html
+* @link https://stackoverflow.com/questions/19025138/gradle-how-to-generate-coverage-report-for-integration-test-using-jacoco
+*/
+jacocoTestReport {
+	// tests are required to run before generating the report
+	dependsOn test
+
+	// we need to make sure all exec files from all test configurations are included
+	getExecutionData().setFrom(fileTree(buildDir).include("/jacoco/*.exec"))
+
+	reports {
+		xml.enabled true
+		html.enabled true
+		csv.enabled true
 	}
 }
 
