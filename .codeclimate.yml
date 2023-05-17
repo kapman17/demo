@@ -1,0 +1,41 @@
+version: "2"         # required to adjust maintainability checks
+
+checks:
+  file-lines:
+    enabled: true
+    config:
+      threshold: 300   # Overrides the default value of 250
+  method-complexity:
+    enabled: true
+    config:
+      threshold: 10   # Overrides the default value of 5
+
+plugins:
+  sonar-java:
+    enabled: true
+    config:
+      sonar.java.source: "17"
+  pmd:
+    enabled: true
+    channel: "beta"
+  duplication:
+    enabled: true
+    config:
+      languages:
+        java:
+          mass_threshold: 50
+
+exclude_patterns:
+  - "config/"
+  - "db/"
+  - "dist/"
+  - "features/"
+  - "**/node_modules/"
+  - "script/"
+  - "**/spec/"
+  - "**/test/"
+  - "**/tests/"
+  - "Tests/"
+  - "**/vendor/"
+  - "**/*_test.go"
+  - "**/*.d.ts"

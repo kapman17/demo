@@ -1,5 +1,8 @@
 # demo
 
+<a href="https://codeclimate.com/github/kapman17/demo/maintainability"><img src="https://api.codeclimate.com/v1/badges/007b64c5aca5a7066ad5/maintainability" /></a>
+<a href="https://codeclimate.com/github/kapman17/demo/test_coverage"><img src="https://api.codeclimate.com/v1/badges/007b64c5aca5a7066ad5/test_coverage" /></a>
+
 # Getting Started
 
 ## Setup
