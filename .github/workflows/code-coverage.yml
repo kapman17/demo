@@ -36,11 +36,11 @@ jobs:
       - name: "Test & publish code coverage"
         uses: paambaati/codeclimate-action@v3.2.0
         env:
-          env: github
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CC_TEST_REPORTER_ID: ${{ secrets.CC_REPORTER_ID }}
           JACOCO_SOURCE_PATH: "${{github.workspace}}/demo/src/main/java"
         with:
+          workingDirectory: "demo"
           coverageCommand: "./gradlew jacocoTestReport"
           coverageLocations: "**/build/reports/jacoco/test/jacocoTestReport.xml:jacoco"
       - name: Cleanup Gradle Cache

@@ -66,10 +66,10 @@ spotless {
 }
 
 /**
- * Set up code coverage reports using jacoco
- * @link https://docs.gradle.org/current/userguide/jacoco_plugin.html
- * @link https://stackoverflow.com/questions/19025138/gradle-how-to-generate-coverage-report-for-integration-test-using-jacoco
- */
+* Set up code coverage reports using jacoco
+* @link https://docs.gradle.org/current/userguide/jacoco_plugin.html
+* @link https://stackoverflow.com/questions/19025138/gradle-how-to-generate-coverage-report-for-integration-test-using-jacoco
+*/
 jacocoTestReport {
 	// tests are required to run before generating the report
 	dependsOn test
